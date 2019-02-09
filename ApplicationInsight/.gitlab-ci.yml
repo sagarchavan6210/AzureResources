@@ -1,0 +1,31 @@
+image: image-name
+
+services:
+- name: proxy-service
+  alias: myproxy
+  
+variables:
+  gitlab_version: "3.0.17"
+  
+stages:
+  - Plan
+  - Apply
+  - Destroy
+ 
+TerraformPlanner:
+  stage: Plan
+  when: manual
+  script: 
+  - sh setup.sh plan
+  
+TerraformCreator:
+  stage: Apply
+  when: manual
+  script: 
+  - sh setup.sh apply
+  
+TerraformDestroyer:
+  stage: Destroy
+  when: manual
+  script: 
+  - sh setup.sh destroy
